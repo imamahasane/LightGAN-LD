@@ -35,7 +35,9 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/LightGAN-LD.git
+   git clone https://github.com/imamahasane/LightGAN-LD
    cd LightGAN-LD
 
-## 
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
