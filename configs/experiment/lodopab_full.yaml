@@ -1,0 +1,10 @@
+seed: 42
+device: cuda
+
+data:
+  name: lodopab
+  root: ./data
+  batch_size: 64
+  num_workers: 8
+  img_size: 362
+  sinogram_shape: [1, 512, 720]

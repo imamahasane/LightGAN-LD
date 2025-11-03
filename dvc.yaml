@@ -1,0 +1,18 @@
+stages:
+  preprocess_lodopab:
+    cmd: bash scripts/prepare_lodopab.sh
+    outs:
+      - data/lodopab_train.h5
+      - data/lodopab_val.h5
+  train_lodopab:
+    cmd: python -m src.cli.train --config configs/experiment/lodopab_full.yaml
+    deps:
+      - data/lodopab_train.h5
+    outs:
+      - checkpoints/best.pt
+  eval_lodopab:
+    cmd: python -m src.cli.eval --config configs/experiment/lodopab_full.yaml --ckpt checkpoints/best.pt
+    deps:
+      - checkpoints/best.pt
+    outs:
+      - reports/

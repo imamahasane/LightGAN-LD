@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "LightGAN-LD: Lightweight GAN for Low-Dose CT Reconstruction"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "YourLastName"
+    given-names: "YourFirstName"
+identifiers:
+  - type: url
+    value: "https://github.com/yourname/lightgan-ld"
+keywords:
+  - low-dose CT
+  - GAN
+  - medical imaging
+  - sinogram encoding
+  - edge-aware learning
+license: "Apache-2.0"
+version: "0.1.0"
+date-released: "2025-11-03"
