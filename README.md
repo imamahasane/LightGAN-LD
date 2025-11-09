@@ -305,9 +305,11 @@ We welcome pull requests and improvements.
 
 ---
 
-## 13. Acknowledgements
+## 13. Acknowledgements & Use of AI Tools
 This work was conducted at the **College of Computer Science, Chongqing University** and the **Department of Software Engineering, Daffodil International University.**
 
+**AI Tools Disclosure:**  
+The authors used OpenAI for grammar refinement, structural organization, and documentation formatting. 
 All scientific content, data processing, and results were **independently verified and approved** by the authors.
 
 ---
