@@ -300,16 +300,15 @@ We welcome pull requests and improvements.
 
 ## 12. Contact
 
-1. Md Imam Ahasan - emamahasane@gmail.com
-2. A. F. M Abdun Noor - abdunnoor11@gmail.com
+1. Md Imam Ahasan - L2300448@stu.cqu.edu.cn
+2. Guangchao Yang - gchao_yang@cqu.edu.cn
+3. A. F. M Abdun Noor - 252-44-010@diu.edu.bd
+4. Mohammad Azam Khan - azamkhan.swe@diu.edu.bd
 
 ---
 
-## 13. Acknowledgements & Use of AI Tools
+## 13. Acknowledgements
 This work was conducted at the **College of Computer Science, Chongqing University** and the **Department of Software Engineering, Daffodil International University.**
-
-**AI Tools Disclosure:**  
-The authors used OpenAI for grammar refinement, structural organization, and documentation formatting. 
 All scientific content, data processing, and results were **independently verified and approved** by the authors.
 
 ---
