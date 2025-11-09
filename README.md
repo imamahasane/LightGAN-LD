@@ -34,7 +34,7 @@ LightGAN-LD achieves **high-fidelity reconstructions** (up to +1.9 dB PSNR gain)
 
 This project uses two publicly available benchmark datasets.  You must obtain them separately under their respective terms.
 
-**LoDoPaB-CT Dataset :**
+**LoDoPaB-CT, a benchmark dataset for low-dose computed tomography reconstruction**
 - **Reference:** Leuschner et al., *Scientific Data* 8, 109 (2021)  
 - **DOI:** [https://doi.org/10.1038/s41597-021-00893-z](https://doi.org/10.1038/s41597-021-00893-z)
 - **Website:** [https://zenodo.org/records/3384092](https://zenodo.org/records/3384092)
@@ -45,7 +45,7 @@ This project uses two publicly available benchmark datasets.  You must obtain th
   - 362×362 → 256×256 (resized)  
   - Normalized to [0, 1]
 
-**NIH–AAPM–Mayo Low-Dose CT Dataset :**
+**Low-dose CT image and projection dataset**
 - **Reference:** Moen et al., *Medical Physics* 48(2):902–911 (2021)
 - **DOI:** [https://doi.org/10.1002/mp.14594](https://doi.org/10.1002/mp.14594)
 - **Website:** [https://www.aapm.org/grandchallenge/lowdosect/  ](https://www.aapm.org/grandchallenge/lowdosect/)
