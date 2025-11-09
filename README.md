@@ -37,7 +37,7 @@ This project uses two publicly available benchmark datasets.  You must obtain th
 **LoDoPaB-CT Dataset :**
 - **Reference:** Leuschner et al., *Scientific Data* 8, 109 (2021)  
 - **DOI:** [https://doi.org/10.1038/s41597-021-00893-1  ](https://doi.org/10.1038/s41597-021-00893-1)
-- **Website:** [https://lodopab.in.tum.de/  ](https://zenodo.org/records/3384092)
+- **Website:** [https://zenodo.org/records/3384092](https://zenodo.org/records/3384092)
 - **Description:** Synthetic LDCT dataset derived from the LIDC-IDRI thoracic CT collection.  
 - **Usage here:**  
   - 40 000 training, 3 500 validation, 3 500 test slices  
