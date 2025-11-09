@@ -8,7 +8,7 @@ Official implementation of the paper:
 
 > **“LightGAN-LD: A Lightweight Generative Adversarial Network for Efficient Low-Dose CT Reconstruction with Sinogram Encoding and Edge-Aware Learning”**  
 > *Md Imam Ahasan, Guangchao Yang, A. F. M. Abdun Noor, Mohammad Azam Khan*  
-> Submitted to **PeerJ Computer Science (AI Application category)**, November 2025.
+> Submitted to **PeerJ Computer Science (Applications of  AI category)**, November 2025.
 
 ---
 
