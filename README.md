@@ -36,8 +36,8 @@ This project uses two publicly available benchmark datasets.  You must obtain th
 
 **LoDoPaB-CT Dataset :**
 - **Reference:** Leuschner et al., *Scientific Data* 8, 109 (2021)  
-- **DOI:** https://doi.org/10.1038/s41597-021-00893-1  
-- **Website:** https://lodopab.in.tum.de/  
+- **DOI:** [https://doi.org/10.1038/s41597-021-00893-1  ](https://doi.org/10.1038/s41597-021-00893-z)
+- **Website:** [https://lodopab.in.tum.de/  ](https://zenodo.org/records/3384092)
 - **Description:** Synthetic LDCT dataset derived from the LIDC-IDRI thoracic CT collection.  
 - **Usage here:**  
   - 40 000 training, 3 500 validation, 3 500 test slices  
@@ -46,8 +46,9 @@ This project uses two publicly available benchmark datasets.  You must obtain th
   - Normalized to [0, 1]
 
 **NIH–AAPM–Mayo Low-Dose CT Dataset :**
-- **Reference:** Moen et al., *Medical Physics* 48(2):902–911 (2021)  
-- **URL:** https://www.aapm.org/grandchallenge/lowdosect/  
+- **Reference:** Moen et al., *Medical Physics* 48(2):902–911 (2021)
+- **DOI:** [https://doi.org/10.1002/mp.14594](https://doi.org/10.1002/mp.14594)
+- **Website:** [https://www.aapm.org/grandchallenge/lowdosect/  ](https://www.aapm.org/grandchallenge/lowdosect/)
 - **Description:** Abdominal CT volumes with both normal-dose (NDCT) and simulated low-dose (LDCT) images.  
 - **Usage here:**  
   - 8 patients for training (~4 800 slices)  
@@ -303,7 +304,7 @@ We welcome pull requests and improvements.
 1. Md Imam Ahasan - L2300448@stu.cqu.edu.cn
 2. Guangchao Yang - gchao_yang@cqu.edu.cn
 3. A. F. M Abdun Noor - 252-44-010@diu.edu.bd
-4. Mohammad Azam Khan - azamkhan.swe@diu.edu.bd
+4. Mohammad Azam Khan - a_khanss@korea.ac.kr
 
 ---
 
