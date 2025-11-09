@@ -36,7 +36,7 @@ This project uses two publicly available benchmark datasets.  You must obtain th
 
 **LoDoPaB-CT Dataset :**
 - **Reference:** Leuschner et al., *Scientific Data* 8, 109 (2021)  
-- **DOI:** [https://doi.org/10.1038/s41597-021-00893-1  ](https://doi.org/10.1038/s41597-021-00893-1)
+- **DOI:** [https://doi.org/10.1038/s41597-021-00893-z](https://doi.org/10.1038/s41597-021-00893-z)
 - **Website:** [https://zenodo.org/records/3384092](https://zenodo.org/records/3384092)
 - **Description:** Synthetic LDCT dataset derived from the LIDC-IDRI thoracic CT collection.  
 - **Usage here:**  
