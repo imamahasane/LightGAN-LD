@@ -34,7 +34,7 @@ LightGAN-LD achieves **high-fidelity reconstructions** (up to +1.9 dB PSNR gain)
 
 This project uses two publicly available benchmark datasets.  You must obtain them separately under their respective terms.
 
-**LoDoPaB-CT Dataset :**
+**1. LoDoPaB-CT Dataset :**
 - **Reference:** Leuschner et al., *Scientific Data* 8, 109 (2021) *LoDoPaB-CT, a benchmark dataset for low-dose computed tomography reconstruction.*
 - **DOI:** [https://doi.org/10.1038/s41597-021-00893-z](https://doi.org/10.1038/s41597-021-00893-z)
 - **Website:** [https://zenodo.org/records/3384092](https://zenodo.org/records/3384092)
@@ -45,7 +45,7 @@ This project uses two publicly available benchmark datasets.  You must obtain th
   - 362×362 → 256×256 (resized)  
   - Normalized to [0, 1]
 
-**NIH–AAPM–Mayo Low-Dose CT Dataset :**
+**2. NIH–AAPM–Mayo Low-Dose CT Dataset :**
 - **Reference:** Moen et al., *Medical Physics* 48(2):902–911 (2021) *Low-dose CT image and projection dataset.*
 - **DOI:** [https://doi.org/10.1002/mp.14594](https://doi.org/10.1002/mp.14594)
 - **Website:** [https://www.aapm.org/grandchallenge/lowdosect/  ](https://www.aapm.org/grandchallenge/lowdosect/)
@@ -54,6 +54,24 @@ This project uses two publicly available benchmark datasets.  You must obtain th
   - 8 patients for training (~4 800 slices)  
   - 2 patients for testing (~1 100 slices)  
   - Resized to 256×256, normalized to [0, 1]
+ 
+**3. Piglet CT Dataset :**
+- **Reference:** Yi, X., & Babyn, P. (2018). Sharpness-aware low-dose CT denoising using conditional generative adversarial network. Journal of Digital Imaging, 31, 655–669.
+- **DOI:** [https://doi.org/10.1007/s10278-018-0056-0](https://doi.org/10.1007/s10278-018-0056-0)
+- **Code reference (related implementation):** [https://github.com/xinario/SAGAN](https://github.com/xinario/SAGAN)
+- **Description:** The Piglet CT dataset consists of in vivo animal CT scans acquired under low-dose imaging conditions. Compared to human clinical datasets, the piglet data exhibit different anatomical structures, tissue composition, and attenuation characteristics, making it a challenging out-of-distribution (OOD) benchmark for reconstruction methods.
+- **Dataset characteristics:**
+  - Real CT acquisitions (not simulated)
+  - Low-dose imaging protocol (~10% dose setting commonly used in literature)
+  - Anatomical distribution differs significantly from human CT datasets
+  - Contains realistic noise, texture variation, and biological variability
+- **Usage in this work:**
+  - Used only for testing (no training or fine-tuning)
+  - Evaluates cross-domain generalization capability
+  - Model trained on human datasets (Mayo) is directly applied
+  - Quantitative evaluation performed using PSNR, SSIM, and RMSE
+  - Serves as a strict benchmark for robustness under biological domain shift
+ 
 
 ---
 
