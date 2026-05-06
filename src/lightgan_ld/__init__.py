@@ -1,1 +1,2 @@
-__all__ = ['data','engine','losses','models','utils','registry']
+"""LightGAN-LD research package."""
+__version__ = "0.2.0"

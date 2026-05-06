@@ -1,27 +1,33 @@
-import torch
-import torch.nn as nn
-from .blocks.ghost import GhostModule
+from __future__ import annotations
 
-def sn_if(x: nn.Module, use_sn: bool) -> nn.Module:
-    return nn.utils.spectral_norm(x) if use_sn else x
+import torch
+from torch import nn
+
+from .blocks import GhostModule, norm2d
+
+
+def maybe_sn(module: nn.Module, use: bool) -> nn.Module:
+    return nn.utils.spectral_norm(module) if use else module
+
 
 class PatchDiscriminator(nn.Module):
-    def __init__(self, in_ch=1, base=64, spectral_norm=False):
+    """Fully convolutional PatchGAN discriminator with GhostModules and average-pooling downsampling."""
+
+    def __init__(self, in_channels: int = 1, base_channels: int = 64, num_layers: int = 4, spectral_norm: bool = False, norm: str = "batch"):
         super().__init__()
-        c = base
-        def block(ic, oc, k=3, s=2, p=1):
-            return nn.Sequential(
-                sn_if(nn.Conv2d(ic, oc, k, s, p), spectral_norm),
+        layers: list[nn.Module] = []
+        prev = in_channels
+        for i in range(num_layers):
+            ch = min(base_channels * (2**i), base_channels * 8)
+            layers.extend([
+                maybe_sn(nn.Conv2d(prev, ch, 3, padding=1), spectral_norm),
                 nn.LeakyReLU(0.2, inplace=True),
-                GhostModule(oc, oc),
-            )
-        self.net = nn.Sequential(
-            block(in_ch, c),
-            block(c, c*2),
-            block(c*2, c*4),
-            block(c*4, c*4),
-            sn_if(nn.Conv2d(c*4, 1, 1), spectral_norm)
-        )
+                GhostModule(ch, ch, norm=norm),
+                nn.AvgPool2d(2),
+            ])
+            prev = ch
+        layers.append(maybe_sn(nn.Conv2d(prev, 1, 1), spectral_norm))
+        self.net = nn.Sequential(*layers)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.net(x)

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lightgan-ld"
+version = "0.2.0"
+description = "Research-grade implementation of LightGAN-LD for low-dose CT reconstruction."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name="LightGAN-LD Authors"}]
+dependencies = [
+  "torch>=2.1",
+  "torchvision>=0.16",
+  "numpy>=1.23",
+  "h5py>=3.8",
+  "PyYAML>=6.0",
+  "tqdm>=4.64",
+  "pillow>=9.0",
+  "matplotlib>=3.7",
+  "pandas>=2.0",
+  "scipy>=1.10",
+  "scikit-image>=0.20",
+  "tensorboard>=2.12"
+]
+
+[project.optional-dependencies]
+metrics = ["lpips>=0.1.4"]
+tracking = ["wandb>=0.16"]
+dev = ["pytest>=7", "ruff>=0.4", "black>=24.0", "mypy>=1.8"]
+benchmark = ["thop>=0.1.1"]
+
+[project.scripts]
+lightgan-train = "lightgan_ld.cli.train:main"
+lightgan-eval = "lightgan_ld.cli.evaluate:main"
+lightgan-infer = "lightgan_ld.cli.infer:main"
+lightgan-cross-eval = "lightgan_ld.cli.cross_eval:main"
+lightgan-benchmark = "lightgan_ld.cli.benchmark:main"
+lightgan-ablate = "lightgan_ld.cli.ablate:main"
+lightgan-stats = "lightgan_ld.cli.stats:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]

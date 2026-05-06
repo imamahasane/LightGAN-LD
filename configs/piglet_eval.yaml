@@ -1,0 +1,16 @@
+defaults:
+  - base.yaml
+data:
+  name: piglet
+  image_size: 256
+  batch_size: 1
+  val_batch_size: 8
+  num_workers: 4
+  pin_memory: true
+  normalize: true
+  splits:
+    test: {path: data/piglet/test.h5}
+eval:
+  use_encoder: false
+train:
+  output_dir: outputs/piglet_eval

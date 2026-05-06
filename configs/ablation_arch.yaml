@@ -1,0 +1,5 @@
+defaults:
+  - lodopab_full.yaml
+train:
+  output_dir: outputs/ablation_arch
+  epochs: 200

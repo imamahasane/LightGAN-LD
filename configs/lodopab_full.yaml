@@ -1,0 +1,18 @@
+defaults:
+  - base.yaml
+data:
+  name: lodopab
+  image_size: 256
+  batch_size: 64
+  val_batch_size: 16
+  num_workers: 8
+  pin_memory: true
+  normalize: true
+  augment: true
+  splits:
+    train: {path: data/lodopab/train.h5}
+    val: {path: data/lodopab/val.h5}
+    test: {path: data/lodopab/test.h5}
+train:
+  output_dir: outputs/lodopab_full
+  epochs: 200

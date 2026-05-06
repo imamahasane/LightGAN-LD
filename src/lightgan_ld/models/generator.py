@@ -1,37 +1,49 @@
+from __future__ import annotations
+
 import torch
-import torch.nn as nn
-from .blocks.residual_ghost import ResidualGhostBlock
+from torch import nn
+import torch.nn.functional as F
+
+from .blocks import MixStyle, ResidualGhostBlock
+
 
 class LightGANLDGenerator(nn.Module):
-    def __init__(self, in_ch=1, base=48, num_down=4, use_ghost=True, use_condconv=True, use_eca=True, experts=4):
+    """Compact Ghost/CondConv/ECA U-Net generator for LDCT restoration."""
+
+    def __init__(self, in_channels: int = 1, out_channels: int = 1, base_channels: int = 48, num_down: int = 4, use_ghost: bool = True, use_condconv: bool = True, use_eca: bool = True, condconv_experts: int = 4, norm: str = "batch", mixstyle_p: float = 0.0, mixstyle_alpha: float = 0.1, dropout: float = 0.0):
         super().__init__()
-        chs = [base*(2**i) for i in range(num_down)]
+        self.mixstyle = MixStyle(p=mixstyle_p, alpha=mixstyle_alpha)
+        channels = [base_channels * (2**i) for i in range(num_down)]
         self.downs = nn.ModuleList()
         self.pools = nn.ModuleList()
-        last_ch = in_ch
-        for c in chs:
-            self.downs.append(ResidualGhostBlock(last_ch, c, use_ghost, use_condconv, use_eca, experts))
+        prev = in_channels
+        for ch in channels:
+            self.downs.append(ResidualGhostBlock(prev, ch, use_ghost=use_ghost, use_condconv=use_condconv, use_eca=use_eca, experts=condconv_experts, norm=norm, dropout=dropout))
             self.pools.append(nn.AvgPool2d(2))
-            last_ch = c
-        self.bottleneck = ResidualGhostBlock(last_ch, last_ch, use_ghost, use_condconv, use_eca, experts)
+            prev = ch
+        self.bridge = nn.Sequential(
+            ResidualGhostBlock(prev, prev, use_ghost=use_ghost, use_condconv=use_condconv, use_eca=use_eca, experts=condconv_experts, norm=norm, dropout=dropout),
+            ResidualGhostBlock(prev, prev, use_ghost=use_ghost, use_condconv=use_condconv, use_eca=use_eca, experts=condconv_experts, norm=norm, dropout=dropout),
+        )
         self.ups = nn.ModuleList()
-        self.upconvs = nn.ModuleList()
-        for c in reversed(chs):
-            self.ups.append(nn.Upsample(scale_factor=2, mode="bilinear", align_corners=False))
-            self.upconvs.append(ResidualGhostBlock(last_ch + c, c, use_ghost, use_condconv, use_eca, experts))
-            last_ch = c
-        self.out_conv = nn.Conv2d(last_ch, 1, 1)
-        self.act = nn.Sigmoid()
+        self.dec = nn.ModuleList()
+        for ch in reversed(channels):
+            self.ups.append(nn.Conv2d(prev, ch, 1))
+            self.dec.append(ResidualGhostBlock(ch + ch, ch, use_ghost=use_ghost, use_condconv=use_condconv, use_eca=use_eca, experts=condconv_experts, norm=norm, dropout=dropout))
+            prev = ch
+        self.out_conv = nn.Conv2d(prev, out_channels, 1)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.mixstyle(x)
         skips = []
-        for d, p in zip(self.downs, self.pools):
-            x = d(x); skips.append(x); x = p(x)
-        x = self.bottleneck(x)
-        for up, blk, skip in zip(self.ups, self.upconvs, reversed(skips)):
-            x = up(x)
-            if x.shape[-1] != skip.shape[-1] or x.shape[-2] != skip.shape[-2]:
-                x = torch.nn.functional.interpolate(x, size=skip.shape[-2:], mode="bilinear", align_corners=False)
+        for down, pool in zip(self.downs, self.pools):
+            x = down(x)
+            skips.append(x)
+            x = pool(x)
+        x = self.bridge(x)
+        for up1x1, dec, skip in zip(self.ups, self.dec, reversed(skips)):
+            x = F.interpolate(x, size=skip.shape[-2:], mode="bilinear", align_corners=False)
+            x = up1x1(x)
             x = torch.cat([x, skip], dim=1)
-            x = blk(x)
-        return self.act(self.out_conv(x))
+            x = dec(x)
+        return torch.sigmoid(self.out_conv(x))

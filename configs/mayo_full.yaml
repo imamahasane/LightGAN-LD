@@ -1,0 +1,19 @@
+defaults:
+  - base.yaml
+data:
+  name: mayo
+  image_size: 256
+  batch_size: 64
+  val_batch_size: 16
+  num_workers: 8
+  pin_memory: true
+  normalize: true
+  augment: true
+  window: [400, 40]
+  splits:
+    train: {path: data/mayo/train.h5}
+    val: {path: data/mayo/val.h5}
+    test: {path: data/mayo/test.h5}
+train:
+  output_dir: outputs/mayo_full
+  epochs: 200
